@@ -14,7 +14,7 @@ For the source of your definitions, use this API:
 `https://dictionaryapi.dev`
 
 For your page styling I have used: `https://getbootstrap.com` 
-There is a simple [html page sample](index.html) to get you started.
+There is a simple [html page sample](src/index.html) to get you started.
 It's an example of using bootstrap for styling a page without a lot of effort.
 
 Write a program in Typescript to handle the action of calling the dictionary api from the page, and displaying the result, in a nice fashion.
