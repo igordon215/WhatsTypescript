@@ -20,6 +20,11 @@ if(word) {
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
         const data = await response.json();
 
+        if (Array.isArray(data) && data.length > 0) {
+            const definitions = data[0].meanings.flatMap((meaning: any) =>
+                meaning.definitions.map((def: any) => '<li>${def.definition}</li>')).join('');
+            }
+
         }
 
 
