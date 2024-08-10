@@ -31,14 +31,15 @@ if(word) {
                 resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
             }
 
-        }
+        } catch (error) {
+            console.error('Error: ', error);
+            resultDiv.innerHTML = '<p>An error occurred while fetching the definition.</p>'
 
-
-
+            }
 
     }
 
 
-
+    result false;
 
   };
