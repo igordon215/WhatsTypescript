@@ -23,6 +23,12 @@ if(word) {
         if (Array.isArray(data) && data.length > 0) {
             const definitions = data[0].meanings.flatMap((meaning: any) =>
                 meaning.definitions.map((def: any) => '<li>${def.definition}</li>')).join('');
+
+                resultDiv.innerHTML =
+                `<h2>${word}</h2>
+                <ul>${definitions}</ul>`;
+            } else {
+                resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
             }
 
         }
