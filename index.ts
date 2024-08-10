@@ -1,7 +1,6 @@
 // Import stylesheets
 import './style.css';
 
-
 const form: HTMLFormElement = document.querySelector('#defineform');
 const resultDiv: HTMLElement = document.querySelector('#result');
 
@@ -14,4 +13,21 @@ form.onsubmit = async (e: Event) => {
   const word = formData.get('defineword') as string;
   console.log(text);
   return false; // prevent reload
-};
+
+
+if(word) {
+    try {
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        const data = await response.json();
+
+        }
+
+
+
+
+    }
+
+
+
+
+  };
