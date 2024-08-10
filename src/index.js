@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const formData = new FormData(form);
     const word = formData.get('defineword');
+    //Phonetic stuff
+    let phonetic = wordData.phonetic || '';
+    let audioSrc = '';
     
     if (!word) {
       resultDiv.innerHTML = '<p>Please enter a word to define.</p>';
@@ -18,14 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        const definitions = data[0].meanings.flatMap(meaning => 
-          meaning.definitions.map(def => `<li>${def.definition}</li>`)
-        ).join('');
 
-        resultDiv.innerHTML = `
-          <h2>${word}</h2>
-          <ul>${definitions}</ul>
-        `;
+
+
+
+
+
+
+
+
+
+
+      }
+        const definitions = data[0].meanings.flatMap(meaning => 
+          meaning.definitions.map(def => `<li>${def.definition}</li>`)).join('');
+
+        resultDiv.innerHTML =
+        ` <h2>${word}</h2>
+          <ul>${definitions}</ul> `;
       } else {
         resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
       }
