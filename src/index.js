@@ -18,13 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (Array.isArray(data) && data.length > 0) {
         const wordData = data[0];
-        //FOR PHONETICS
+
+        // FOR PHONETICS
         let phonetic = wordData.phonetic || '';
         let audioSrc = '';
 
-
-
-//PHONETICS
+        // PHONETICS
         if (wordData.phonetics) {
           const phoneticWithAudio = wordData.phonetics.find(p => p.audio);
           if (phoneticWithAudio) {
@@ -37,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2>${wordData.word}</h2>
           <p class="phonetic">${phonetic}</p>
         `;
-//PHONETICS AUDIO SOURCE
+
+        // PHONETICS AUDIO SOURCE
         if (audioSrc) {
           htmlContent += `
             <audio controls>
@@ -47,14 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
         }
 
-
-//WORD ORIGIN - IF IT EXISTS...
+        // WORD ORIGIN - IF IT EXISTS...
         if (wordData.origin) {
           htmlContent += `<p class="origin"><strong>Origin:</strong> ${wordData.origin}</p>`;
         }
 
-
- // Create accordion for parts of speech
+        // CREATE ACCORDION FOR PARTS OF SPEECH
         htmlContent += '<div class="accordion" id="definitionAccordion">';
 
         wordData.meanings.forEach((meaning, index) => {
@@ -62,29 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
           htmlContent += `
             <div class="accordion-item">
               <h2 class="accordion-header" id="heading-${index}">
-                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${accordionId}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="${accordionId}">
+                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#${accordionId}"
+                        aria-expanded="${index === 0 ? 'true' : 'false'}"
+                        aria-controls="${accordionId}">
                   ${meaning.partOfSpeech}
                 </button>
               </h2>
-              <div id="${accordionId}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#definitionAccordion">
+              <div id="${accordionId}"
+                   class="accordion-collapse collapse ${index === 0 ? 'show' : ''}"
+                   aria-labelledby="heading-${index}"
+                   data-bs-parent="#definitionAccordion">
                 <div class="accordion-body">
           `;
 
-
-
-
-
-
-
-
-
-
-
-
-// VERB - MEANING
-        //wordData.meanings.forEach(meaning => {
-         // htmlContent += `<h3 class="part-of-speech">${meaning.partOfSpeech}</h3>`;
-
+          // VERB - MEANING
           if (meaning.definitions && meaning.definitions.length > 0) {
             htmlContent += '<ol class="definitions">';
             meaning.definitions.forEach(def => {
@@ -95,12 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
               `;
             });
-            htmlContent += '</ol>';//CLOSING TAG ORDERED LIST
+            htmlContent += '</ol>'; // Closing tag ordered list
           }
 
-
-
-// SYNONYMS &  ANTONYMS
+          // SYNONYMS & ANTONYMS
           if (meaning.synonyms && meaning.synonyms.length > 0) {
             htmlContent += `<p class="synonyms">Synonyms: ${meaning.synonyms.join(', ')}</p>`;
           }
@@ -109,23 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlContent += `<p class="antonyms">Antonyms: ${meaning.antonyms.join(', ')}</p>`;
           }
 
+          // CLOSE ACCORDION
+          htmlContent += `
+                </div>
+              </div>
+            </div>
+          `;
+        });
 
-
-//CLOSE ACCORDION
-           htmlContent += `
-                          </div>
-                        </div>
-                      </div>
-                    `;
-                    });
-           htmlContent += '</div>';
-
-
-
+        htmlContent += '</div>';
         resultDiv.innerHTML = htmlContent;
       } else {
-        //resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
-//ADD FOR ACCORDION
+        // ADD FOR ACCORDION
         resultDiv.innerHTML = htmlContent;
       }
     } catch (error) {
