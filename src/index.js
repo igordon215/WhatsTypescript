@@ -55,12 +55,28 @@ form.addEventListener('submit', async (e) => {
         `;
       }
 
+//VERB
+ wordData.meanings.forEach(meaning => {
+          htmlContent += `
+            <h3 class="part-of-speech">${meaning.partOfSpeech}</h3>
+            <ol class="definitions">
+          `;
+
+          meaning.definitions.forEach(def => {
+            htmlContent += `
+              <li>
+                <p>${def.definition}</p>
+                ${def.example ? `<p class="example">"${def.example}"</p>` : ''}
+              </li>
+            `;
+          });
+
+          htmlContent += `</ol>`;
+        });
+
+      //htmlContent += `<ul>${definitions}</ul>`;
 
 
-
-
-
-      htmlContent += `<ul>${definitions}</ul>`;
 
       resultDiv.innerHTML = htmlContent;
     } else {
