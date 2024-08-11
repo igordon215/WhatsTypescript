@@ -54,10 +54,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+ // Create accordion for parts of speech
+        htmlContent += '<div class="accordion" id="definitionAccordion">';
+
+        wordData.meanings.forEach((meaning, index) => {
+          const accordionId = `accordion-${index}`;
+          htmlContent += `
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading-${index}">
+                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${accordionId}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="${accordionId}">
+                  ${meaning.partOfSpeech}
+                </button>
+              </h2>
+              <div id="${accordionId}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading-${index}" data-bs-parent="#definitionAccordion">
+                <div class="accordion-body">
+          `;
+
+
+
+
+
+
+
+
+
+
+
+
 // VERB - MEANING
-        wordData.meanings.forEach(meaning => {
-          htmlContent += `<h3 class="part-of-speech">${meaning.partOfSpeech}</h3>`;
-          
+        //wordData.meanings.forEach(meaning => {
+         // htmlContent += `<h3 class="part-of-speech">${meaning.partOfSpeech}</h3>`;
+
           if (meaning.definitions && meaning.definitions.length > 0) {
             htmlContent += '<ol class="definitions">';
             meaning.definitions.forEach(def => {
@@ -81,14 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
           if (meaning.antonyms && meaning.antonyms.length > 0) {
             htmlContent += `<p class="antonyms">Antonyms: ${meaning.antonyms.join(', ')}</p>`;
           }
-        });
 
+
+
+//CLOSE ACCORDION
+           htmlContent += `
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                    });
+           htmlContent += '</div>';
 
 
 
         resultDiv.innerHTML = htmlContent;
       } else {
-        resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
+        //resultDiv.innerHTML = `<p>No definitions found for "${word}".</p>`;
+//ADD FOR ACCORDION
+        resultDiv.innerHTML = htmlContent;
       }
     } catch (error) {
       console.error('Error:', error);
