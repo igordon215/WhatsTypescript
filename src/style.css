@@ -1,3 +1,23 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 2.0;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #2c3e50;
+}
+
+
+
+
 .phonetic {
   font-style: italic;
   color: #666;
