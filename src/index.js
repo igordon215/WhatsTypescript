@@ -109,6 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         htmlContent += '</div>';
         resultDiv.innerHTML = htmlContent;
+        } else if (data.title === "No Definitions Found") {
+                //HANDLE UNAVAILABLE WORD
+                resultDiv.innerHTML = `
+                  <p>No definitions found for "${word}". This might be because:</p>
+                  <ul>
+                    <li>This is a free API certain words may not be available</li>
+                    <li>It's a proper noun (like a name or place)</li>
+                    <li>It's a specialized term not in the general dictionary</li>
+                    <li>There might be a spelling error</li>
+                  </ul>
+                  <p>Try searching for a different word or check the spelling.</p>
+                `;
       } else {
         // ADD FOR ACCORDION
         resultDiv.innerHTML = htmlContent;
