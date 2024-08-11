@@ -28,3 +28,18 @@ audio {
   margin-top: 5px;
   margin-left: 20px;
 }
+.synonyms, .antonyms {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.synonyms {
+  color: #27ae60;
+}
+
+.antonyms {
+  color: #c0392b;
+}
+
+
+
