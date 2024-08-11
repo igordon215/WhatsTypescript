@@ -40,6 +40,11 @@ audio {
 .antonyms {
   color: #c0392b;
 }
+.origin {
+  font-style: italic;
+  color: #34495e;
+  margin-bottom: 15px;
+}
 
 
 

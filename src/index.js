@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-
+//WORD ORIGIN - IF IT EXISTS...
+        if (wordData.origin) {
+          htmlContent += `<p class="origin"><strong>Origin:</strong> ${wordData.origin}</p>`;
+        }
 
 
 // VERB - MEANING
