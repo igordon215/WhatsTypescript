@@ -4,36 +4,32 @@ body {
   color: #333;
   background-color: #f4f4f4;
 }
-
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
-
 h1, h2 {
   color: #2c3e50;
 }
-
-
-
-
 .phonetic {
   font-style: italic;
-  color: #666;
-  margin-bottom: 10px;
+  color: #2e4053;
+  margin-bottom: 15px;
 }
-
 audio {
   margin-bottom: 20px;
+  width: 40%;
 }
-.part-of-speech {
+.accordion-button {
+  background-color: #ecf0f1;
   color: #2c3e50;
-  font-style: italic;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  font-weight: bold;
 }
-
+.accordion-button:not(.collapsed) {
+  background-color: #3498db;
+  color: #fff;
+}
 .definitions {
   padding-left: 20px;
 }
@@ -41,9 +37,8 @@ audio {
 .definitions li {
   margin-bottom: 10px;
 }
-
 .example {
-  color: #7f8c8d;
+  color: #1b2631;
   font-style: italic;
   margin-top: 5px;
   margin-left: 20px;
@@ -52,11 +47,9 @@ audio {
   margin-top: 10px;
   font-style: italic;
 }
-
 .synonyms {
   color: #27ae60;
 }
-
 .antonyms {
   color: #c0392b;
 }
