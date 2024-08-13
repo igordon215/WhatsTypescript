@@ -1,29 +1,33 @@
+//WAITS FOR DOM TO BE COMPLETELY LOADED
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('#defineform');
   const resultDiv = document.querySelector('#result');
-
+//EVENT LISTENER FOR FORM SUBMISSION
   form.addEventListener('submit', async (e) => {
+   //PREVENTS DEFAULT FORM SUBMISSION
     e.preventDefault();
+    //GET THE WORD FROM THE FORM
     const formData = new FormData(form);
     const word = formData.get('defineword');
-    
+    //IF A WORD WAS ENTERED
     if (!word) {
       resultDiv.innerHTML = '<p>Please enter a word to define.</p>';
       return;
     }
 
     try {
+     //FETCH THE DEFINITION FROM THE API
       const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
       const data = await response.json();
-
+    //CHECKS FOR A VALID RESPONSE
       if (Array.isArray(data) && data.length > 0) {
         const wordData = data[0];
 
-        // FOR PHONETICS
+        // INITIALIZE PHONETIC AND AUDIO SOURCE
         let phonetic = wordData.phonetic || '';
         let audioSrc = '';
 
-        // PHONETICS
+        // FINDS PHONETIC WITH AUDIO (IF AVAILABLE)
         if (wordData.phonetics) {
           const phoneticWithAudio = wordData.phonetics.find(p => p.audio);
           if (phoneticWithAudio) {
@@ -31,13 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
             audioSrc = phoneticWithAudio.audio;
           }
         }
-
+        //STARTS BUILDING THE HTML CONTENT
         let htmlContent = `
           <h2>${wordData.word}</h2>
           <p class="phonetic">${phonetic}</p>
         `;
 
-        // PHONETICS AUDIO SOURCE
+        //ADD AUDIO PLAYER IF AVAILABLE
         if (audioSrc) {
           htmlContent += `
             <audio controls>
@@ -99,15 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlContent += `<p class="antonyms">Antonyms: ${meaning.antonyms.join(', ')}</p>`;
           }
 
-          // CLOSE ACCORDION
+          // CLOSE ACCORDION ITEM
           htmlContent += `
                 </div>
               </div>
             </div>
           `;
         });
-
+        // CLOSE ACCORDION
         htmlContent += '</div>';
+        // UPDATE THE RESULT DIV WITH THE GENERATED HTML
         resultDiv.innerHTML = htmlContent;
         } else if (data.title === "No Definitions Found") {
                 //HANDLE UNAVAILABLE WORD
@@ -121,10 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   </ul>
                   <p>Try searching for a different word or check the spelling.</p>
                 `;
-      } else {
-        // ADD FOR ACCORDION
-        resultDiv.innerHTML = htmlContent;
-      }
+       } else {
+        //HANDLE OTHER ERRORS
+        resultDiv.innerHTML = '<p>An error occurred while fetching the definition.</p>';
+       }
     } catch (error) {
       console.error('Error:', error);
       resultDiv.innerHTML = '<p>An error occurred while fetching the definition.</p>';
